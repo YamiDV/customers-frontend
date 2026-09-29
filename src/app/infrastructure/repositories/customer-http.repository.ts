@@ -6,6 +6,7 @@ import { CustomerRepository } from '../../domain/repositories/customer.repositor
 import { CustomerRequest } from '../../domain/models/customer-request.model';
 import { Customer } from '../../domain/models/customer.model';
 import { CustomerSearch } from '../../domain/models/customer-search.model';
+import { CustomerIndicators } from '../../domain/models/customer-indicators.model';
 
 @Injectable()
 export class CustomerHttpRepository implements CustomerRepository {
@@ -15,7 +16,7 @@ export class CustomerHttpRepository implements CustomerRepository {
 
   constructor(
     private readonly http: HttpClient
-  ) {}
+  ) { }
 
   createCustomer(
     customer: CustomerRequest
@@ -29,14 +30,21 @@ export class CustomerHttpRepository implements CustomerRepository {
 
   getCustomers(search: CustomerSearch): Observable<Customer[]> {
 
-  return this.http.get<Customer[]>(
-    `${this.apiUrl}/find`,
-    {
-      params: {
-        filterType: search.filterType,
-        searchTerm: search.searchTerm
+    return this.http.get<Customer[]>(
+      `${this.apiUrl}/find`,
+      {
+        params: {
+          filterType: search.filterType,
+          searchTerm: search.searchTerm
+        }
       }
-    }
-  );
-}
+    );
+  }
+
+  getCustomerIndicators(): Observable<CustomerIndicators> {
+
+    return this.http.get<CustomerIndicators>(
+      `${this.apiUrl}/indicators`
+    );
+  }
 }

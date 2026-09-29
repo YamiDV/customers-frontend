@@ -1,0 +1,131 @@
+<div class="indicators-layout">
+
+    <app-sidebar></app-sidebar>
+
+    <main class="main">
+
+        <app-header></app-header>
+
+        <section class="content">
+
+            <div class="page-title">
+                <h2>Indicadores</h2>
+                <p>Estadísticas de nacimiento de clientes</p>
+            </div>
+
+            @if (loading()) {
+
+            <div class="loading">
+                Cargando indicadores...
+            </div>
+
+            } @else if (errorMessage()) {
+
+            <div class="error-message">
+                {{ errorMessage() }}
+            </div>
+
+            } @else {
+
+            @if (indicators(); as data) {
+
+            <section class="indicator-grid">
+
+                <app-indicator-card title="Mayor cantidad de nacimientos" [value]="
+  data.highestBirthPeriod
+    ? formatMonthYear(
+        data.highestBirthPeriod.month,
+        data.highestBirthPeriod.year
+      )
+    : '-'
+" [subtitle]="
+                data.highestBirthPeriod
+                  ? data.highestBirthPeriod.totalBirths
+                    + ' clientes'
+                  : 'Sin datos'
+              ">
+                </app-indicator-card>
+
+                <app-indicator-card title="Menor cantidad de nacimientos" [value]="
+  data.lowestBirthPeriod
+    ? formatMonthYear(
+        data.lowestBirthPeriod.month,
+        data.lowestBirthPeriod.year
+      )
+    : '-'
+" [subtitle]="
+                data.lowestBirthPeriod
+                  ? data.lowestBirthPeriod.totalBirths
+                    + ' clientes'
+                  : 'Sin datos'
+              ">
+                </app-indicator-card>
+
+            </section>
+
+            <app-births-chart [data]="data.birthsByPeriod">
+            </app-births-chart>
+
+            <div class="rates-table">
+
+                <div class="table-header">
+                    <h3>Tasa de natalidad por periodo</h3>
+                    <p>Porcentaje de clientes nacidos en cada mes/año</p>
+                </div>
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Periodo</th>
+                            <th>Nacimientos</th>
+                            <th>Tasa de natalidad</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @for (
+                        item of data.monthlyBirthRates;
+                        track item.month
+                        ) {
+
+                        <tr>
+                            <td>
+                                {{ formatMonth(item.month) }}
+                            </td>
+
+                            <td>
+                                {{ item.totalBirths }}
+                            </td>
+
+                            <td>
+                                {{ item.birthRate.toFixed(2) }}%
+                            </td>
+                        </tr>
+
+                        } @empty {
+
+                        <tr>
+                            <td colspan="3">
+                                No hay información disponible
+                            </td>
+                        </tr>
+
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            }
+
+            }
+
+        </section>
+
+    </main>
+
+</div>
