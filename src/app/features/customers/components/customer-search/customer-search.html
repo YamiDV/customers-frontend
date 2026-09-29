@@ -1,0 +1,133 @@
+<div class="search-container">
+
+  <div class="search-header">
+    <h3>Buscar clientes</h3>
+    <p>Consulta clientes registrados por DNI o email</p>
+  </div>
+
+  <div class="filters">
+
+    <div class="filter-group">
+
+      <label for="filterType">
+        Filtro
+      </label>
+
+      <select
+        id="filterType"
+        [(ngModel)]="filterType">
+
+        <option value="ALL">
+          Todos
+        </option>
+
+        <option value="DNI">
+          DNI
+        </option>
+
+        <option value="EMAIL">
+          Email
+        </option>
+
+      </select>
+
+    </div>
+
+    <div class="filter-group search-term">
+
+      <label for="searchTerm">
+        Buscar
+      </label>
+
+      <input
+        id="searchTerm"
+        type="text"
+        [(ngModel)]="searchTerm"
+        placeholder="DNI o email">
+
+    </div>
+
+    <div class="filter-actions">
+
+      <button
+        class="search-button"
+        (click)="search()">
+        Buscar
+      </button>
+
+      <button
+        class="clear-button"
+        (click)="clearFilters()">
+        Limpiar
+      </button>
+
+    </div>
+
+  </div>
+
+
+  @if (loading()) {
+
+    <div class="loading">
+      Cargando clientes...
+    </div>
+
+  } @else {
+
+    @if (errorMessage()) {
+
+      <div class="error-message">
+        {{ errorMessage() }}
+      </div>
+
+    } @else {
+
+      <div class="table-container">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>DNI</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Email</th>
+              <th>Fecha de nacimiento</th>
+              <th>Fecha de creación</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            @for (customer of customers(); track customer.id) {
+
+              <tr>
+                <td>{{ customer.dni }}</td>
+                <td>{{ customer.firstName }}</td>
+                <td>{{ customer.lastName }}</td>
+                <td>{{ customer.email }}</td>
+                <td>{{ customer.birthDate }}</td>
+                <td>{{ customer.createdAt }}</td>
+              </tr>
+
+            } @empty {
+
+              <tr>
+                <td colspan="6" class="empty">
+                  No se encontraron clientes
+                </td>
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    }
+
+  }
+
+</div>

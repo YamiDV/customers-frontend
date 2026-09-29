@@ -1,0 +1,120 @@
+.form-container {
+  width: 100%;
+}
+
+.form-header {
+  margin-bottom: 25px;
+}
+
+.form-header h3 {
+  margin: 0;
+
+  font-size: 18px;
+  font-weight: 600;
+
+  color: #344054;
+}
+
+.form-header p {
+  margin: 5px 0 0;
+
+  font-size: 13px;
+
+  color: #98a2b3;
+}
+
+.customer-form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+.form-row {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 500;
+
+  color: #475467;
+}
+
+.form-group input {
+  height: 42px;
+
+  padding: 0 12px;
+
+  border: 1px solid #d0d5dd;
+  border-radius: 6px;
+
+  outline: none;
+
+  font-size: 14px;
+
+  transition: border 0.2s;
+}
+
+.form-group input:focus {
+  border-color: #0789e8;
+}
+
+.error {
+  font-size: 12px;
+  color: #d92d20;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: 10px;
+}
+
+.submit-button {
+  border: none;
+
+  background: #0789e8;
+  color: white;
+
+  padding: 11px 20px;
+
+  border-radius: 6px;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background: #0676c7;
+}
+
+.success-message {
+  padding: 12px;
+  border-radius: 6px;
+  background: #ecfdf3;
+  color: #027a48;
+  font-size: 13px;
+}
+
+.error-message {
+  padding: 12px;
+  border-radius: 6px;
+  background: #fef3f2;
+  color: #b42318;
+  font-size: 13px;
+}

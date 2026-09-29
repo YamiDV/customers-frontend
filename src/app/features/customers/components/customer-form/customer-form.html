@@ -1,0 +1,145 @@
+<div class="form-container">
+
+    <div class="form-header">
+        <h3>Registrar cliente</h3>
+        <p>Completa los datos del nuevo cliente</p>
+    </div>
+
+    <form [formGroup]="customerForm"
+          (ngSubmit)="submit()"
+          class="customer-form">
+
+        <div class="form-row">
+
+            <div class="form-group">
+                <label for="firstName">Nombre</label>
+
+                <input
+                    id="firstName"
+                    type="text"
+                    formControlName="firstName"
+                    placeholder="Ingrese el nombre">
+
+                @if (
+                    customerForm.get('firstName')?.invalid &&
+                    customerForm.get('firstName')?.touched
+                ) {
+                    <span class="error">
+                        El nombre es obligatorio
+                    </span>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Apellido</label>
+
+                <input
+                    id="lastName"
+                    type="text"
+                    formControlName="lastName"
+                    placeholder="Ingrese el apellido">
+
+                @if (
+                    customerForm.get('lastName')?.invalid &&
+                    customerForm.get('lastName')?.touched
+                ) {
+                    <span class="error">
+                        El apellido es obligatorio
+                    </span>
+                }
+            </div>
+
+        </div>
+
+        <div class="form-row">
+
+            <div class="form-group">
+                <label for="email">Email</label>
+
+                <input
+                    id="email"
+                    type="email"
+                    formControlName="email"
+                    placeholder="cliente@email.com">
+
+                @if (
+                    customerForm.get('email')?.invalid &&
+                    customerForm.get('email')?.touched
+                ) {
+                    <span class="error">
+                        Ingrese un email válido
+                    </span>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="dni">DNI</label>
+
+                <input
+                    id="dni"
+                    type="text"
+                    formControlName="dni"
+                    maxlength="8"
+                    placeholder="12345678">
+
+                @if (
+                    customerForm.get('dni')?.invalid &&
+                    customerForm.get('dni')?.touched
+                ) {
+                    <span class="error">
+                        El DNI debe contener 8 dígitos
+                    </span>
+                }
+            </div>
+
+        </div>
+
+        <div class="form-row">
+
+            <div class="form-group">
+                <label for="birthDate">
+                    Fecha de nacimiento
+                </label>
+
+                <input
+                    id="birthDate"
+                    type="date"
+                    formControlName="birthDate">
+
+                @if (
+                    customerForm.get('birthDate')?.invalid &&
+                    customerForm.get('birthDate')?.touched
+                ) {
+                    <span class="error">
+                        La fecha de nacimiento es obligatoria
+                    </span>
+                }
+            </div>
+
+        </div>
+
+        @if (successMessage) {
+            <div class="success-message">
+                {{ successMessage }}
+            </div>
+        }
+
+        @if (errorMessage) {
+            <div class="error-message">
+                {{ errorMessage }}
+            </div>
+        }
+
+        <div class="form-actions">
+
+            <button
+                type="submit"
+                class="submit-button">
+                Registrar cliente
+            </button>
+
+        </div>
+
+    </form>
+
+</div>

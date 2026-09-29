@@ -1,0 +1,48 @@
+<div class="customers-layout">
+
+    <app-sidebar></app-sidebar>
+
+    <main class="main">
+
+        <app-header></app-header>
+
+        <section class="content">
+
+            <div class="page-title">
+                <h2>Clientes</h2>
+                <p>Registro y búsqueda de clientes</p>
+            </div>
+
+            <div class="customer-options">
+
+                <button class="option-button" [class.active]="selectedOption === 'register'" (click)="showRegister()">
+                    Registrar cliente
+                </button>
+
+                <button class="option-button" [class.active]="selectedOption === 'search'" (click)="showSearch()">
+                    Buscar cliente
+                </button>
+
+            </div>
+
+            <div class="customer-content">
+
+                @switch (selectedOption) {
+
+                @case ('register') {
+                <app-customer-form></app-customer-form>
+                }
+
+                @case ('search') {
+                <app-customer-search></app-customer-search>
+                }
+
+                }
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
